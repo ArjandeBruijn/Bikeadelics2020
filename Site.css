@@ -1,0 +1,16 @@
+﻿
+.rotate {
+    -webkit-transform: rotate(-20deg);
+    -moz-transform: rotate(-20deg);
+    -ms-transform: rotate(-20deg);
+    -o-transform: rotate(-20deg);
+    transform: rotate(-20deg);
+}
+p {
+    font-size: 2em;
+    text-align: center;
+}
+h2 {
+    font-size: 3em;
+    text-align:center;
+}

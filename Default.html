@@ -2,11 +2,36 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <script src="PageScript.js"></script>
+    <link rel="stylesheet" href="Site.css">
     <meta charset="utf-8" />
     <title></title>
 </head>
-<body>
+<body onresize="StartPageScript()" onload="StartPageScript()">
      
-    <img style="width:100% ; height:100%" src="GoddessCardDesign.png" />
+    <img id="BikeadelicPennyFarthingBreweryRideText" 
+         style="position:fixed;
+                width: 300px; 
+                height: 200px" 
+                src="BikeadelicPennyFarthingBreweryRideText.PNG" 
+         />
+     
+    <img id="logo" 
+         class="rotate"
+         style="position: fixed;" 
+         src="logo.png" />
+
+    <div id="howItWorksText" 
+         style="width: 500px; 
+                position: fixed">
+        
+        <p>
+            <b>How it works</b>
+        <br>
+        We meet up at Funkwerks (beer brewery) where we teach you penny farthing. 
+        Once you're comfortable we take a scenic round tour on the poudre trail!</p>
+
+    </div>
+
 </body>
 </html>
