@@ -1,60 +1,100 @@
 ﻿function StartPageScript()
 {
-    
-
-    var setElementPosition = function(elem, topFraction, leftFraction)
-    {
-        elem.style.top = (topFraction * 100)+"%";
-
-        elem.style.left = (leftFraction * 100) + "%";
-
-        elem.style.marginTop =
-            - topFraction * elem.clientHeight + "px ";
-
-        elem.style.marginLeft =
-            -leftFraction * elem.clientWidth + "px ";
-    }
-    var putBelow = function (elemBottom, elemTop)
-    {
-        var rect = elemTop.getBoundingClientRect();
-
-        elemBottom.style.top = (rect.top + elemTop.clientHeight + 10) + "px";
-        elemBottom.style.left = (rect.left + 0.5 * elemTop.clientWidth) - 0.5 * elemBottom.clientWidth + "px";
-
-    }
-    var putRight = function (elemRight, elemLeft) {
-
-        var elemLeftRect = elemLeft.getBoundingClientRect();
-
-        elemRight.style.left = (elemLeftRect.left + elemLeft.clientWidth + 10) + "px";
-        
-    }
+     
     const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     const vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-    if (vh > vw)
-    {
-        alert("screen.orientation.angle portrait");
-         
-        setElementPosition(document.getElementById("BikeadelicPennyFarthingBreweryRideText"), 0.05, 0.5);
+    const hwRatio = vh / vw;
 
-        putBelow(document.getElementById("howItWorksText"), document.getElementById("BikeadelicPennyFarthingBreweryRideText"));
+    var setElementTop = function (id, topFraction) {
+
+        var elem = document.getElementById(id);
+
+        elem.style.top = (topFraction * vh) - 0.5 * elem.clientHeight + "px";
          
-        putBelow(document.getElementById("logo"), document.getElementById("howItWorksText"));
+    }
+    var setElementLeft = function(id, leftFraction)
+    {
+        var elem = document.getElementById(id);
+
+        elem.style.left = (leftFraction * vw) - 0.5 * elem.clientWidth + "px";
+         
+    }
+    var putBelow = function (idBottom, idTop)
+    {
+        var elemBottom = document.getElementById(idBottom);
+
+        var elemTop = document.getElementById(idTop);
+
+        var rect = elemTop.getBoundingClientRect();
+
+        elemBottom.style.top = (rect.top + elemTop.clientHeight + 10) + "px";
+    }
+
+    var putRight = function (idRight, idLeft) {
+
+        var elemRight = document.getElementById(idRight);
+
+        var elemLeft = document.getElementById(idLeft);
+
+        var elemLeftRect = elemLeft.getBoundingClientRect();
+         
+        elemRight.style.left = (elemLeftRect.left + elemLeft.clientWidth + 10) + "px";
+        
+    }
+
+    var centerVertical = function (itemIds)
+    {
+
 
     }
-    else
+
+    if (hwRatio > 0.8)
     {
-        alert("screen.orientation.angle landscape");
+        // tall and skinny
+        setElementLeft("BikeadelicPennyFarthingBreweryRideText", 0.5);
 
-        setElementPosition(document.getElementById("BikeadelicPennyFarthingBreweryRideText"), 0.1, 0.2);
+        setElementLeft("logo", 0.5);
 
-        putBelow(document.getElementById("logo"), document.getElementById("BikeadelicPennyFarthingBreweryRideText"));
+        setElementLeft("howItWorksText", 0.5);
          
-        putRight(document.getElementById("howItWorksText"), document.getElementById("BikeadelicPennyFarthingBreweryRideText"));
+        putBelow("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
+
+        putBelow("logo", "howItWorksText");
+
+        var itemIds = ["logo", "howItWorksText", "BikeadelicPennyFarthingBreweryRideText"];
+
+        centerVertical(itemIds);
+    }
+    else if (hwRatio > 0.45)
+    {
+        // squared
+        setElementTop("BikeadelicPennyFarthingBreweryRideText", 0.2);
+
+        setElementTop("howItWorksText", 0.2);
+
+        setElementLeft("BikeadelicPennyFarthingBreweryRideText", 0.2);
+
+        setElementLeft("logo", 0.2);
+
+        putBelow("logo", "BikeadelicPennyFarthingBreweryRideText");
+
+        putRight("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
 
     }
-    
+    else {
+        // wide and short
+        setElementTop("BikeadelicPennyFarthingBreweryRideText", 0.5);
+
+        setElementTop("howItWorksText", 0.5);
+
+        setElementTop("logo", 0.5);
+
+        putRight("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
+
+        putRight("logo", "howItWorksText");
+
+    }
     
 }
  
