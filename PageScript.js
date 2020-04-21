@@ -10,7 +10,7 @@
 
         var elem = document.getElementById(id);
 
-        elem.style.top = (topFraction * vh) - 0.5 * elem.clientHeight + "px";
+        elem.style.top = (topFraction * vh)  + "px";
          
     }
     var setElementLeft = function(id, leftFraction)
@@ -42,7 +42,39 @@
         elemRight.style.left = (elemLeftRect.left + elemLeft.clientWidth + 10) + "px";
         
     }
+    var adjustWidthHowItWorksTextWidth = function ()
+    {
+        var desiredHeight = document.getElementById("logo")
+            .getBoundingClientRect()
+            .bottom -
+            document.getElementById("BikeadelicPennyFarthingBreweryRideText")
+            .getBoundingClientRect()
+                .top;
 
+        var elem = document.getElementById("howItWorksText");
+
+        while (elem.getBoundingClientRect().height < desiredHeight)
+        {
+            var newWidth = (elem.clientWidth - 1) + "px";
+            elem.style.width = newWidth;
+
+        }
+    }
+    var centerElements = function ()
+    {
+        var elemhowItWorksText = document.getElementById("howItWorksText");
+        var elemlogo = document.getElementById("logo");
+        var elemBikeadelicPennyFarthingBreweryRideText = document.getElementById("BikeadelicPennyFarthingBreweryRideText");
+
+        elemhowItWorksText.style.left = ((0.5 * vw)  + 10) + "px";
+        elemlogo.style.left = ((0.5 * vw) - elemlogo.clientWidth -10) + "px";
+        elemBikeadelicPennyFarthingBreweryRideText.style.left = ((0.5 * vw) - elemBikeadelicPennyFarthingBreweryRideText.clientWidth - 10) + "px";
+
+        var howItWorksTop = (0.5 * (vh - elemhowItWorksText.clientHeight))
+        elemhowItWorksText.style.top = howItWorksTop + "px";
+        elemBikeadelicPennyFarthingBreweryRideText.style.top = elemhowItWorksText.style.top;
+        elemlogo.style.top = howItWorksTop + elemBikeadelicPennyFarthingBreweryRideText.clientHeight + 10 + "px" ;
+    }
     var centerVertical = function (itemIds)
     {
 
@@ -69,10 +101,6 @@
     else if (hwRatio > 0.45)
     {
         // squared
-        setElementTop("BikeadelicPennyFarthingBreweryRideText", 0.2);
-
-        setElementTop("howItWorksText", 0.2);
-
         setElementLeft("BikeadelicPennyFarthingBreweryRideText", 0.2);
 
         setElementLeft("logo", 0.2);
@@ -80,6 +108,10 @@
         putBelow("logo", "BikeadelicPennyFarthingBreweryRideText");
 
         putRight("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
+
+        adjustWidthHowItWorksTextWidth();
+
+        centerElements();
 
     }
     else {
