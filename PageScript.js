@@ -110,6 +110,16 @@
         putRight("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
 
         adjustWidthHowItWorksTextWidth();
+         
+        document.getElementById("miniPfImage").style.height =
+            (0.75 * document.getElementById("miniPfImage").clientHeight) + "px";
+
+        document.getElementById("miniPfImage").style.width =
+            (0.75 * document.getElementById("miniPfImage").clientWidth) + "px";
+
+        document.getElementById("miniPfImage").style.left = vw -
+            document.getElementById("miniPfImage").clientWidth + "px";
+        
 
         centerElements();
 
