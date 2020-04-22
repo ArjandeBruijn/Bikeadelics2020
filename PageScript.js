@@ -43,12 +43,6 @@
         
     }
     
-    
-    var centerVertical = function (itemIds)
-    {
-
-
-    }
      
     if (hwRatio > 0.8)
     {
