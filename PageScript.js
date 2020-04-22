@@ -42,45 +42,14 @@
         elemRight.style.left = (elemLeftRect.left + elemLeft.clientWidth + 10) + "px";
         
     }
-    var adjustWidthHowItWorksTextWidth = function ()
-    {
-        var desiredHeight = document.getElementById("logo")
-            .getBoundingClientRect()
-            .bottom -
-            document.getElementById("BikeadelicPennyFarthingBreweryRideText")
-            .getBoundingClientRect()
-                .top;
-
-        var elem = document.getElementById("howItWorksText");
-
-        while (elem.getBoundingClientRect().height < desiredHeight)
-        {
-            var newWidth = (elem.clientWidth - 1) + "px";
-            elem.style.width = newWidth;
-
-        }
-    }
-    var centerElements = function ()
-    {
-        var elemhowItWorksText = document.getElementById("howItWorksText");
-        var elemlogo = document.getElementById("logo");
-        var elemBikeadelicPennyFarthingBreweryRideText = document.getElementById("BikeadelicPennyFarthingBreweryRideText");
-
-        elemhowItWorksText.style.left = ((0.5 * vw)  + 10) + "px";
-        elemlogo.style.left = ((0.5 * vw) - elemlogo.clientWidth -10) + "px";
-        elemBikeadelicPennyFarthingBreweryRideText.style.left = ((0.5 * vw) - elemBikeadelicPennyFarthingBreweryRideText.clientWidth - 10) + "px";
-
-        var howItWorksTop = (0.5 * (vh - elemhowItWorksText.clientHeight))
-        elemhowItWorksText.style.top = howItWorksTop + "px";
-        elemBikeadelicPennyFarthingBreweryRideText.style.top = elemhowItWorksText.style.top;
-        elemlogo.style.top = howItWorksTop + elemBikeadelicPennyFarthingBreweryRideText.clientHeight + 10 + "px" ;
-    }
+    
+    
     var centerVertical = function (itemIds)
     {
 
 
     }
-
+     
     if (hwRatio > 0.8)
     {
         // tall and skinny
@@ -100,29 +69,38 @@
     }
     else if (hwRatio > 0.45)
     {
-        // squared
-        setElementLeft("BikeadelicPennyFarthingBreweryRideText", 0.2);
+        $("#PosingImageRound").css({ top: 0, left: 0, width: 400 });
 
-        setElementLeft("logo", 0.2);
-
-        putBelow("logo", "BikeadelicPennyFarthingBreweryRideText");
-
-        putRight("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
-
-        adjustWidthHowItWorksTextWidth();
-         
-        document.getElementById("miniPfImage").style.height =
-            (0.75 * document.getElementById("miniPfImage").clientHeight) + "px";
-
-        document.getElementById("miniPfImage").style.width =
-            (0.75 * document.getElementById("miniPfImage").clientWidth) + "px";
-
-        document.getElementById("miniPfImage").style.left = vw -
-            document.getElementById("miniPfImage").clientWidth + "px";
+        $("#miniPfImage").css({ top: 0, width: 300, left: vw - 300 });
         
+        $("#howItWorksText")
+            .css({ width: 800 })
+            .css({ top: vh - $("#howItWorksText").height() - 10 })
+            .css({ left: 0.5 * (vw - $("#howItWorksText").width())});
+        
+        $("#logo")
+            .css({ top: 200, left: 0.5 * vw - 0.5 * $("#logo").width() });
 
-        centerElements();
+        $("#phone")
+            .css({ width: 150, top: vh - 150, left: 125 });
 
+
+        $("#mailBox")
+            .css({ width: 150, top: vh - 300, left: 20 });
+
+        $("#karbike").css({ width: 150 })
+            .css({ left: vw - 2 * $("#karbike").width() })
+            .css({ top: vh - $("#karbike").height() - 20 });
+
+        $("#bakfiets").css({ width: 150 })
+            .css({ left: vw - $("#karbike").width() })
+            .css({ top: vh - 2 * $("#karbike").height() - 20 });
+         
+        $("#BikeadelicPennyFarthingBreweryRideText")
+            .css({ width: 700 })
+            .css({ left: 0.5 * vw - 0.5 * $("#BikeadelicPennyFarthingBreweryRideText").width() });
+         
+        
     }
     else {
         // wide and short
