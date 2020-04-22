@@ -72,14 +72,14 @@
         $("#PosingImageRound").css({ top: 0, left: 0, width: 400 });
 
         $("#miniPfImage").css({ top: 0, width: 300, left: vw - 300 });
-        
-        $("#howItWorksText")
-            .css({ width: 800 })
-            .css({ top: vh - $("#howItWorksText").height() - 10 })
-            .css({ left: 0.5 * (vw - $("#howItWorksText").width())});
-        
+         
         $("#logo")
             .css({ top: 200, left: 0.5 * vw - 0.5 * $("#logo").width() });
+         
+        $("#howItWorksText")
+            .css({ width: 800 })
+            .css({ top: $("#logo").position().top + $("#logo").height() + 60 })
+            .css({ left: 0.5 * (vw - $("#howItWorksText").width()) });
 
         $("#phone")
             .css({ width: 150, top: vh - 150, left: 125 });
