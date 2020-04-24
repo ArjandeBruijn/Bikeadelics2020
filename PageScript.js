@@ -1,7 +1,14 @@
-﻿$(document).ready(function ()
+﻿var viewWidth = function () {
+    return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+}
+var viewHeight = function () {
+    return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+}
+
+$(document).ready(function ()
 {
-    vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    vw = viewWidth();
+    vh = viewHeight();
 
     var pixelGrowth = 10; 
 
@@ -116,7 +123,8 @@ function ShowPopup(id) {
 
 function StartPageScript()
 {
-      
+    vw = viewWidth();
+    vh = viewHeight();
     const hwRatio = vh / vw;
 
     var setElementTop = function (id, topFraction) {
