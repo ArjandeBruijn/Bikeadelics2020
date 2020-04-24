@@ -5,12 +5,11 @@ var viewHeight = function () {
     return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 }
 
-$(document).ready(function ()
-{
+$(document).ready(function () {
     vw = viewWidth();
     vh = viewHeight();
 
-    var pixelGrowth = 10; 
+    var pixelGrowth = 10;
 
     allElements = function () {
         var elements = $('div');
@@ -28,7 +27,7 @@ $(document).ready(function ()
         $("#BikeadelicPennyFarthingBreweryRideText").css({ width: $("#BikeadelicPennyFarthingBreweryRideText").width() + pixelGrowth });
         $("#BikeadelicPennyFarthingBreweryRideText").trigger('doPlacement');
     });
-    
+
 
     $('#naun').bind('grow', function () {
         $("#naun").css({ width: $("#naun").width() + pixelGrowth });
@@ -43,6 +42,11 @@ $(document).ready(function ()
         $("#miniPfImage").css({ width: $("#miniPfImage").width() + pixelGrowth });
         $('#miniPfImage').trigger('doPlacement');
     });
+
+    $('#PosingImageRound').bind('doPlacement', function () {
+
+        $("#PosingImageRound").css({ top: 0, left: 0 });
+    });
     $('#miniPfImage').bind('doPlacement', function () {
 
         $("#miniPfImage").css({ left: vw - $("#miniPfImage").width() });
@@ -50,7 +54,7 @@ $(document).ready(function ()
 
     $('#karbike').bind('doPlacement', function () {
         $('#karbike').css({ top: vh - $("#karbike").height() - 20 });
-        $('#karbike').css({ left: vw - $("#karbike").width() - $("#bakfiets").width() -30 })
+        $('#karbike').css({ left: vw - $("#karbike").width() - $("#bakfiets").width() - 30 })
     });
     $('#bakfiets').bind('doPlacement', function () {
         $("#bakfiets").css({ top: vh - 2 * $("#bakfiets").height() - 20 });
@@ -62,11 +66,11 @@ $(document).ready(function ()
         $("#karbike").css({ width: $("#karbike").width() + pixelGrowth });
         $("#karbike").trigger('doPlacement');
     });
-    
+
     $('#steve').bind('doPlacement', function () {
 
         $("#steve").css({ top: vh - $("#naun").height() - $("#steve").height() - 10 });
-        $("#steve").css({ left:  10 });
+        $("#steve").css({ left: 10 });
     });
 
     $('#steve').bind('grow', function () {
@@ -74,7 +78,7 @@ $(document).ready(function ()
         $("#steve").css({ width: $("#steve").width() + pixelGrowth });
     });
 
-   
+
     $('#bakfiets').bind('grow', function () {
 
         $("#bakfiets").css({ width: $("#bakfiets").width() + pixelGrowth });
@@ -89,9 +93,9 @@ $(document).ready(function ()
     $('#howItWorksText').bind('grow', function () {
 
         $("#howItWorksText").css({ width: $("#howItWorksText").width() + pixelGrowth });
-         
-        $("#howItWorksText").css({ 'font-size': parseFloat($("#howItWorksText").css('font-size').replace('px', '')) + 2 + "px"});
-        
+
+        $("#howItWorksText").css({ 'font-size': parseFloat($("#howItWorksText").css('font-size').replace('px', '')) + 2 + "px" });
+
         $("#howItWorksText").trigger('doPlacement');
     });
     $('#logo').bind('doPlacement', function () {
@@ -102,11 +106,11 @@ $(document).ready(function ()
                 - (0.5 * $("#logo").height())
         });
     });
-    
+
     $('#naun').bind('doPlacement', function () {
 
         $("#naun").css({ top: vh - $("#naun").height() - 20, left: $("#steve").width() + 10 });
-         
+
     });
 
     $('#logo').bind('grow', function () {
@@ -121,166 +125,93 @@ function ShowPopup(id) {
     popup.classList.toggle("show");
 }
 
-function StartPageScript()
-{
+function StartPageScript() {
     vw = viewWidth();
     vh = viewHeight();
-    const hwRatio = vh / vw;
 
-    var setElementTop = function (id, topFraction) {
+    var sizeCorrection = Math.min(vw / 1920, vh / 969);
 
-        var elem = document.getElementById(id);
+    $("#PosingImageRound").css({ width: sizeCorrection * 400 });
 
-        elem.style.top = (topFraction * vh)  + "px";
-         
-    }
-    var setElementLeft = function(id, leftFraction)
-    {
-        var elem = document.getElementById(id);
+    $("#miniPfImage").css({ top: 0, width: sizeCorrection * 300 });
 
-        elem.style.left = (leftFraction * vw) - 0.5 * elem.clientWidth + "px";
-         
-    }
-    var putBelow = function (idBottom, idTop)
-    {
-        var elemBottom = document.getElementById(idBottom);
+    $("#naun").css({ width: sizeCorrection * 200 });
 
-        var elemTop = document.getElementById(idTop);
+    $("#steve").css({ width: sizeCorrection * 200 });
 
-        var rect = elemTop.getBoundingClientRect();
+    $("#karbike").css({ width: sizeCorrection * 150 });
 
-        elemBottom.style.top = (rect.top + elemTop.clientHeight + 10) + "px";
-    }
+    $("#bakfiets").css({ width: sizeCorrection * 150 });
 
-    var putRight = function (idRight, idLeft) {
+    $("#BikeadelicPennyFarthingBreweryRideText").css({ width: sizeCorrection * 700 });
 
-        var elemRight = document.getElementById(idRight);
+    var fontsize = sizeCorrection * 1.1 + "em";
 
-        var elemLeft = document.getElementById(idLeft);
+    $("#howItWorksText").css({ width: sizeCorrection * 800 })
+        .css({ 'font-size': fontsize });
 
-        var elemLeftRect = elemLeft.getBoundingClientRect();
-         
-        elemRight.style.left = (elemLeftRect.left + elemLeft.clientWidth + 10) + "px";
-        
-    }
-     
-    if (hwRatio > 0.8)
-    {
-        // tall and skinny
-        setElementLeft("BikeadelicPennyFarthingBreweryRideText", 0.5);
+    $("#logo").css({ width: sizeCorrection * 400 });
 
-        setElementLeft("logo", 0.5);
+    $("#BikeadelicPennyFarthingBreweryRideText").trigger('doPlacement');
 
-        setElementLeft("howItWorksText", 0.5);
-         
-        putBelow("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
+    $('#miniPfImage').trigger('doPlacement');
 
-        putBelow("logo", "howItWorksText");
+    $("#karbike").trigger('doPlacement');
 
-        var itemIds = ["logo", "howItWorksText", "BikeadelicPennyFarthingBreweryRideText"];
+    $('#bakfiets').trigger('doPlacement');
 
-        centerVertical(itemIds);
-    }
-    else if (hwRatio > 0.45)
-    {
-        $("#PosingImageRound").css({ top: 0, left: 0, width: 400 });
-          
-        $("#miniPfImage").css({ top: 0, width: 300, left: vw - 300 });
-         
-        $("#naun").css({ width: 200 });
-         
-        $("#steve").css({ width: 200 });
-         
-        $("#karbike").css({ width: 150 });
+    $("#howItWorksText").trigger('doPlacement');
 
-        $("#bakfiets").css({ width: 150 });
-          
-        $("#BikeadelicPennyFarthingBreweryRideText").css({ width: 700 });
-         
-        $("#howItWorksText").css({ width: 800 }).css({ 'font-size': "1.1em" });
+    $("#logo").trigger('doPlacement');
 
-        $("#logo").css({ width: 400 });
+    $("#naun").trigger('doPlacement');
 
-        $("#BikeadelicPennyFarthingBreweryRideText").trigger('doPlacement');
+    $('#steve').trigger('doPlacement');
 
-        $('#miniPfImage').trigger('doPlacement');
+    var elementOverlaps = function (elem) {
+        var elements = $('div');
+        $.merge(elements, $('img'));
 
-        $("#karbike").trigger('doPlacement');
+        for (var e = 0; e < elements.length; e++) {
+            var element = elements[e];
 
-        $('#bakfiets').trigger('doPlacement');
-
-        $("#howItWorksText").trigger('doPlacement');
-         
-        $("#logo").trigger('doPlacement');
-
-        $("#naun").trigger('doPlacement');
-
-        $('#steve').trigger('doPlacement');
-        
-        var elementOverlaps = function (elem)
-        {
-            var elements = $('div');
-            $.merge(elements, $('img'));
-
-            for (var e = 0; e < elements.length; e++)
-            {
-                var element = elements[e];
-
-                if (element != elem)
-                {
-                    if (twoElementsOverlap(elem, element))
-                    {
-                        return true;
-                    }
+            if (element != elem) {
+                if (twoElementsOverlap(elem, element)) {
+                    return true;
                 }
             }
-            return false;
-        } 
-        var twoElementsOverlap = function (el1, el2) {
-
-            var rect1 = el1.getBoundingClientRect();
-            var rect2 = el2.getBoundingClientRect();
-
-            return !(rect1.right < rect2.left ||
-                rect1.left > rect2.right ||
-                rect1.bottom < rect2.top ||
-                rect1.top > rect2.bottom);
-
         }
-        
-         
-        var elements = allElements();
-         
-        for (var e2 = 0; e2 < 1000; e2++)
-        {
-            for (var e = 0; e < elements.length; e++) {
+        return false;
+    }
+    var twoElementsOverlap = function (el1, el2) {
 
-                var element = elements[e];
+        var rect1 = el1.getBoundingClientRect();
+        var rect2 = el2.getBoundingClientRect();
 
-                if (elementOverlaps(element) == false) {
-                    $(element).trigger('grow');
-                }
-                 
+        return !(rect1.right < rect2.left ||
+            rect1.left > rect2.right ||
+            rect1.bottom < rect2.top ||
+            rect1.top > rect2.bottom);
+
+    }
+
+
+    var elements = allElements();
+
+    for (var e2 = 0; e2 < 1000; e2++) {
+        for (var e = 0; e < elements.length; e++) {
+
+            var element = elements[e];
+
+            if (elementOverlaps(element) == false) {
+                $(element).trigger('grow');
             }
+
         }
-         
     }
-    else {
-        // wide and short
-        setElementTop("BikeadelicPennyFarthingBreweryRideText", 0.5);
 
-        setElementTop("howItWorksText", 0.5);
-
-        setElementTop("logo", 0.5);
-
-        putRight("howItWorksText", "BikeadelicPennyFarthingBreweryRideText");
-
-        putRight("logo", "howItWorksText");
-
-    }
-    
 }
- 
+
 
 
 
