@@ -3,6 +3,8 @@
     vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     vh = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
+    var pixelGrowth = 10; 
+
     allElements = function () {
         var elements = $('div');
         $.merge(elements, $('img'));
@@ -16,22 +18,22 @@
     });
     $('#BikeadelicPennyFarthingBreweryRideText').bind('grow', function () {
 
-        $("#BikeadelicPennyFarthingBreweryRideText").css({ width: $("#BikeadelicPennyFarthingBreweryRideText").width() + 10 });
+        $("#BikeadelicPennyFarthingBreweryRideText").css({ width: $("#BikeadelicPennyFarthingBreweryRideText").width() + pixelGrowth });
         $("#BikeadelicPennyFarthingBreweryRideText").trigger('doPlacement');
     });
     
 
-    $('#phone').bind('grow', function () {
-        $("#phone").css({ width: $("#phone").width() + 10 });
+    $('#naun').bind('grow', function () {
+        $("#naun").css({ width: $("#naun").width() + pixelGrowth });
     });
 
     $('#PosingImageRound').bind('grow', function () {
-        $("#PosingImageRound").css({ width: $("#PosingImageRound").width() + 10 });
+        $("#PosingImageRound").css({ width: $("#PosingImageRound").width() + pixelGrowth });
     });
 
     $('#miniPfImage').bind('grow', function () {
 
-        $("#miniPfImage").css({ width: $("#miniPfImage").width() + 10 });
+        $("#miniPfImage").css({ width: $("#miniPfImage").width() + pixelGrowth });
         $('#miniPfImage').trigger('doPlacement');
     });
     $('#miniPfImage').bind('doPlacement', function () {
@@ -41,26 +43,34 @@
 
     $('#karbike').bind('doPlacement', function () {
         $('#karbike').css({ top: vh - $("#karbike").height() - 20 });
-        $('#karbike').css({ left: vw - 2 * $("#karbike").width() })
+        $('#karbike').css({ left: vw - $("#karbike").width() - $("#bakfiets").width() -30 })
     });
+    $('#bakfiets').bind('doPlacement', function () {
+        $("#bakfiets").css({ top: vh - 2 * $("#bakfiets").height() - 20 });
+        $("#bakfiets").css({ left: vw - $("#bakfiets").width() - 20 });
+    });
+
     $('#karbike').bind('grow', function () {
 
-        $("#karbike").css({ width: $("#karbike").width() + 10 });
+        $("#karbike").css({ width: $("#karbike").width() + pixelGrowth });
         $("#karbike").trigger('doPlacement');
     });
+    
+    $('#steve').bind('doPlacement', function () {
 
-    $('#mailBox').bind('grow', function () {
-
-        $("#mailBox").css({ width: $("#mailBox").width() + 10 });
+        $("#steve").css({ top: vh - $("#naun").height() - $("#steve").height() - 10 });
+        $("#steve").css({ left:  10 });
     });
 
-    $('#bakfiets').bind('doPlacement', function () {
-        $("#bakfiets").css({ left: vw - $("#bakfiets").width() });
-        $("#bakfiets").css({ top: vh - 2 * $("#bakfiets").height() - 20 });
+    $('#steve').bind('grow', function () {
+
+        $("#steve").css({ width: $("#steve").width() + pixelGrowth });
     });
+
+   
     $('#bakfiets').bind('grow', function () {
 
-        $("#bakfiets").css({ width: $("#bakfiets").width() + 10 });
+        $("#bakfiets").css({ width: $("#bakfiets").width() + pixelGrowth });
         $('#bakfiets').trigger('doPlacement');
     });
     $('#howItWorksText').bind('doPlacement', function () {
@@ -71,11 +81,9 @@
 
     $('#howItWorksText').bind('grow', function () {
 
-        $("#howItWorksText").css({ width: $("#howItWorksText").width() + 10 });
-
-        var newFont = parseFloat($("#howItWorksText").css('font-size').replace('px', '')) + 2 + "px";
-
-        $("#howItWorksText").css({ 'font-size': newFont});
+        $("#howItWorksText").css({ width: $("#howItWorksText").width() + pixelGrowth });
+         
+        $("#howItWorksText").css({ 'font-size': parseFloat($("#howItWorksText").css('font-size').replace('px', '')) + 2 + "px"});
         
         $("#howItWorksText").trigger('doPlacement');
     });
@@ -88,15 +96,15 @@
         });
     });
     
-    $('#phone').bind('doPlacement', function () {
+    $('#naun').bind('doPlacement', function () {
 
-        $("#phone").css({ top: vh - $("#phone").height() - 20, left: $("#mailBox").width() + 10 });
+        $("#naun").css({ top: vh - $("#naun").height() - 20, left: $("#steve").width() + 10 });
          
     });
 
     $('#logo').bind('grow', function () {
 
-        $("#logo").css({ width: $("#logo").width() + 10 });
+        $("#logo").css({ width: $("#logo").width() + pixelGrowth });
         $('#logo').trigger('doPlacement');
     });
 });
@@ -171,9 +179,9 @@ function StartPageScript()
           
         $("#miniPfImage").css({ top: 0, width: 300, left: vw - 300 });
          
-        $("#phone").css({ width: 150 });
+        $("#naun").css({ width: 200 });
          
-        $("#mailBox").css({ width: 150, top: vh - 300, left: 20 });
+        $("#steve").css({ width: 200 });
          
         $("#karbike").css({ width: 150 });
 
@@ -197,7 +205,9 @@ function StartPageScript()
          
         $("#logo").trigger('doPlacement');
 
-        $("#phone").trigger('doPlacement');
+        $("#naun").trigger('doPlacement');
+
+        $('#steve').trigger('doPlacement');
         
         var elementOverlaps = function (elem)
         {
