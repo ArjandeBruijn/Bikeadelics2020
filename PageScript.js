@@ -4,20 +4,20 @@
 var viewHeight = function () {
     return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 }
+var allElements = function () {
+    var elements = $('div');
+    $.merge(elements, $('img'));
+
+    return elements;
+}
+
 
 $(document).ready(function () {
     vw = viewWidth();
     vh = viewHeight();
 
-    var pixelGrowth = 10;
-
-    allElements = function () {
-        var elements = $('div');
-        $.merge(elements, $('img'));
-
-        return elements;
-    }
-
+    var pixelGrowth = 25;
+     
     $('#BikeadelicPennyFarthingBreweryRideText').bind('doPlacement', function () {
         $("#BikeadelicPennyFarthingBreweryRideText").css({ left: 0.5 * vw - 0.5 * $("#BikeadelicPennyFarthingBreweryRideText").width() })
             .css({ top: 20 });
@@ -27,22 +27,17 @@ $(document).ready(function () {
         $("#BikeadelicPennyFarthingBreweryRideText").css({ width: $("#BikeadelicPennyFarthingBreweryRideText").width() + pixelGrowth });
         $("#BikeadelicPennyFarthingBreweryRideText").trigger('doPlacement');
     });
-
-
     $('#naun').bind('grow', function () {
         $("#naun").css({ width: $("#naun").width() + pixelGrowth });
     });
-
     $('#PosingImageRound').bind('grow', function () {
         $("#PosingImageRound").css({ width: $("#PosingImageRound").width() + pixelGrowth });
     });
-
     $('#miniPfImage').bind('grow', function () {
 
         $("#miniPfImage").css({ width: $("#miniPfImage").width() + pixelGrowth });
         $('#miniPfImage').trigger('doPlacement');
     });
-
     $('#PosingImageRound').bind('doPlacement', function () {
 
         $("#PosingImageRound").css({ top: 0, left: 0 });
@@ -51,7 +46,6 @@ $(document).ready(function () {
 
         $("#miniPfImage").css({ left: vw - $("#miniPfImage").width() });
     });
-
     $('#karbike').bind('doPlacement', function () {
         $('#karbike').css({ top: vh - $("#karbike").height() - 20 });
         $('#karbike').css({ left: vw - $("#karbike").width() - $("#bakfiets").width() - 30 })
@@ -60,25 +54,20 @@ $(document).ready(function () {
         $("#bakfiets").css({ top: vh - 2 * $("#bakfiets").height() - 20 });
         $("#bakfiets").css({ left: vw - $("#bakfiets").width() - 20 });
     });
-
     $('#karbike').bind('grow', function () {
 
         $("#karbike").css({ width: $("#karbike").width() + pixelGrowth });
         $("#karbike").trigger('doPlacement');
     });
-
     $('#steve').bind('doPlacement', function () {
 
         $("#steve").css({ top: vh - $("#naun").height() - $("#steve").height() - 10 });
         $("#steve").css({ left: 10 });
     });
-
     $('#steve').bind('grow', function () {
 
         $("#steve").css({ width: $("#steve").width() + pixelGrowth });
     });
-
-
     $('#bakfiets').bind('grow', function () {
 
         $("#bakfiets").css({ width: $("#bakfiets").width() + pixelGrowth });
@@ -89,7 +78,6 @@ $(document).ready(function () {
         $("#howItWorksText").css({ top: vh - $("#howItWorksText").height() - 20 });
         $("#howItWorksText").css({ left: 0.5 * (vw - $("#howItWorksText").width()) });
     });
-
     $('#howItWorksText').bind('grow', function () {
 
         $("#howItWorksText").css({ width: $("#howItWorksText").width() + pixelGrowth });
@@ -106,18 +94,17 @@ $(document).ready(function () {
                 - (0.5 * $("#logo").height())
         });
     });
-
     $('#naun').bind('doPlacement', function () {
 
         $("#naun").css({ top: vh - $("#naun").height() - 20, left: $("#steve").width() + 10 });
 
     });
-
     $('#logo').bind('grow', function () {
 
         $("#logo").css({ width: $("#logo").width() + pixelGrowth });
         $('#logo').trigger('doPlacement');
     });
+    StartPageScript();
 });
 
 function ShowPopup(id) {
@@ -197,6 +184,7 @@ function StartPageScript() {
 
 
     var elements = allElements();
+
 
     for (var e2 = 0; e2 < 1000; e2++) {
         for (var e = 0; e < elements.length; e++) {
