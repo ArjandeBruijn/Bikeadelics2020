@@ -43,23 +43,40 @@
                 padding:0px 0px 0px 0px;">
             <b>How it works</b>
             <br><br>
-            We meet up at Funkwerks (beer brewery) evening or weekend and we teach you how to ride a penny farthing.
+            We meet up at Jessup Farm Barrel House evening or weekend and we teach you how to ride a penny farthing.
 
             <br><br>
-            Once you're comfortable we take a scenic round tour on the poudre trail.
+            Once you're comfortable we take a
+
+            <h class="popup" onclick="ShowPopup('trailmappopup')">
+                scenic round tour
+                <span style="width: 450px;"  class="popuptext" id="trailmappopup">
+
+                    <img id="tour"
+                         style="width: inherit"
+                         src="images/tour map.png" />
+
+
+                    The trip is about 3 miles of scenic trail along the spring creek and the poudre.
+                    It is all hard pavement and you should rarely have to get off the bike. It is fun for
+                    new penny farthing riders.
+
+                </span>
+            </h>
+            on the poudre trail.
 
             <br><br>
             We have mini-penny farthings for 8+ kids and a fun car-bike and bakfiets for kids 4-8.
-            Younger kids can use a bicycle trailer that we can mount behind a Penny Farthing.  
-            
+            Younger kids can use a bicycle trailer that we can mount behind a penny farthing.
+
             <br><br>
-             
+
             <h class="popup" onclick="ShowPopup('phoneNumberPopup')">
                 Call
                 <span class="popuptext" id="phoneNumberPopup">970-492-5630</span>
             </h>
 
-             or
+            or
 
             <h class="popup" onclick="ShowPopup('emailPopup')">
                 mail
@@ -74,6 +91,7 @@
 
     <img id="miniPfImage"
          style="width: 500px;
+                z-index: -1;
                 margin:0px 0px 0px 0px;
                 padding:0px 0px 0px 0px;
                 position: fixed"
