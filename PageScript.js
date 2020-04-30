@@ -1,6 +1,4 @@
-﻿
- 
-var viewWidth = function () {
+﻿var viewWidth = function () {
     return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 }
 var viewHeight = function () {
@@ -31,11 +29,11 @@ function StartPageScript() {
         .css({ width: vh > vw ? 600 : sizeCorrection * 900 });
 
     $("#PosingImageRound")
-        .css({ width: sizeCorrection * 400 })
+        .css({ width: sizeCorrection * 500 })
         .css({ top: 0, left: 0 });
 
     $('#miniPfImage')
-        .css({ width: sizeCorrection * 300 })
+        .css({ width: sizeCorrection * 500 })
         .css({ left: vw - $("#miniPfImage").width() })
         .css({ top: 0 });
 
@@ -68,12 +66,9 @@ function StartPageScript() {
         .css({ top: vh - $("#naun").height() - 20 })
         .css({ left: $("#steve").width() + 10 });
 
-
     $("#steve")
         .css({ top: vh - $("#naun").height() - $("#steve").height() - 10 })
         .css({ left: 10 });
-
-
 }
 
 
