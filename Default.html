@@ -32,7 +32,36 @@
     <img id="bakfiets"
          style="position: fixed; "
          src="images\bakfiets.png" />
-      
+
+
+    <div id="pennyFarthingPopup" class="popup-image">
+
+        <div class="popup-image-text" id="pennyFarthing" onclick="ShowPopupImage('#pennyFarthing')">
+            <img id="pfImage" src="images/penny_farthing.jpeg" />
+
+            Penny Farthings are late 1900s bicycles with a large front wheel and a tiny rear wheel.
+            The large front wheel increases the distance travelled per pedal turn, effectively it
+            is a bicycle gear from a time when the bicycle chain had not been invented yet.
+
+        </div>
+
+    </div>
+
+    
+    <div id="trailmappopup" class="popup-image">
+
+        <div class="popup-image-text" id="trailmap" onclick="ShowPopupImage('#trailmap')">
+            <img id="trailmapImage" src="images/tour map.png" />
+
+            The trip is about 3 miles of scenic trail along the spring creek and the poudre.
+            It is all hard pavement and you should rarely have to get off the bike. It is fun for
+            new penny farthing riders.
+
+        </div>
+
+    </div>
+
+
     <div id="howItWorksText"
          style="width: 400px;
                 margin:0px 0px 0px 0px;
@@ -45,41 +74,18 @@
             <br><br>
             We meet up at Jessup Farm Barrel House evening or weekend and we teach you how to ride a
 
-            <h class="popup" onclick="ShowPopup('#pennyFarthing')">
+            <h style="color: blue; cursor:pointer" onclick="ShowPopupImage('#pennyFarthing')">
                 penny farthing
-                <span style="width: 450px;" class="popuptext" id="pennyFarthing">
-
-                    <img id="pennyFarthing"
-                         style="width: inherit"
-                         src="images/penny_farthing.jpeg" />
-                     
-                    The trip is about 3 miles of scenic trail along the spring creek and the poudre.
-                    It is all hard pavement and you should rarely have to get off the bike. It is fun for
-                    new penny farthing riders.
-
-                </span>
-            </h>.
-
+            </h>
 
             <br><br>
             Once you're comfortable we take a
 
-            <h class="popup" onclick="ShowPopup('#trailmappopup')">
+            <h style="color: blue; cursor:pointer" onclick="ShowPopupImage('#trailmap')">
                 scenic round tour
-                <span style="width: 450px;" class="popuptext" id="trailmappopup">
-
-                    <img id="tour"
-                         style="width: inherit"
-                         src="images/tour map.png" />
-
-
-                    The trip is about 3 miles of scenic trail along the spring creek and the poudre.
-                    It is all hard pavement and you should rarely have to get off the bike. It is fun for
-                    new penny farthing riders.
-
-                </span>
             </h>
-            on the poudre trail.
+            .
+
 
             <br><br>
             We have mini-penny farthings for 8+ kids and a fun car-bike and bakfiets for kids 4-8.
@@ -102,7 +108,7 @@
             for an appointment!
 
         </p>
-        
+
     </div>
 
     <img id="miniPfImage"

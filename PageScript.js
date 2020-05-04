@@ -9,6 +9,11 @@ function ShowPopup(id) {
 
     $(id).css('margin-left', -0.5 * $(id).width() + 'px');
 }
+function ShowPopupImage(id) {
+
+    $(id).toggleClass("show");
+     
+}
 function StartPageScript() {
     vw = viewWidth();
     vh = viewHeight();
@@ -44,9 +49,7 @@ function StartPageScript() {
     $('#karbike')
         .css({ top: vh - $("#karbike").height() - 20 })
         .css({ left: vw - $("#karbike").width() - $("#bakfiets").width() - 30 });
-
-
-
+     
     var freeSpace = vh - $("#BikeadelicPennyFarthingBreweryRideText").height() - $("#logo").height() - $("#howItWorksText").height();
 
 
@@ -69,6 +72,27 @@ function StartPageScript() {
     $("#steve")
         .css({ top: vh - $("#naun").height() - $("#steve").height() - 10 })
         .css({ left: 10 });
+
+    $("#pfImage")
+        .css({ height: Math.min($("#pfImage").height(), 0.7 * vh) })
+        .css({ width: Math.min($("#pfImage").width(), 0.7 * vw) });
+
+    
+    $("#pennyFarthingPopup")
+        .css({ width: $("#pfImage").width()+ 10 })
+        .css({ left: 0.5 * (vw - $("#pennyFarthingPopup").width()) })
+        .css({ top: 0.5 * (vh - $("#pennyFarthingPopup").height()) });
+
+    $("#trailmapImage")
+        .css({ height: Math.min($("#trailmapImage").height(), 0.7 * vh) })
+        .css({ width: Math.min($("#trailmapImage").width(), 0.7 * vw) });
+
+
+    $("#trailmappopup")
+        .css({ width: $("#trailmapImage").width() + 10 })
+        .css({ left: 0.5 * (vw - $("#trailmappopup").width()) })
+        .css({ top: 0.5 * (vh - $("#trailmappopup").height()) });
+    
 }
 
 
