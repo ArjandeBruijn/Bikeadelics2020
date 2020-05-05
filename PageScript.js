@@ -14,7 +14,45 @@ function ShowPopupImage(id) {
     $(id).toggleClass("show");
      
 }
+$.fn.calculateNaturalDimensions = function (onNaturalDimensionsDefined) {
+    var img = this[0];
+
+    var newImg = new Image();
+    newImg.src = img.src;
+     
+    if (newImg.complete) {
+        img.naturalWidth = newImg.width;
+        img.naturalHeight = newImg.height;
+        onNaturalDimensionsDefined(img);
+    } else {
+        $(newImg).load(function ()
+        {
+            img.naturalWidth = newImg.width;
+            img.naturalHeight = newImg.height;
+            onNaturalDimensionsDefined(img)
+        });
+    }
+
+};
+function ScaleImage(id, containerId)
+{
+    $(id).calculateNaturalDimensions(function (img) {
+        var mult = Math.min(((0.7 * vh) / img.naturalHeight), ((0.7 * vw) / img.naturalWidth));
+
+        $(id)
+            .css({ height: mult * img.naturalHeight })
+            .css({ width: mult * img.naturalWidth });
+         
+        $(containerId)
+            .css({ width: $(id).width() + 10 })
+            .css({ left: 0.5 * (vw - $(containerId).width()) })
+            .css({ top: 0.5 * (vh - $(containerId).height()) });
+
+    });
+
+}
 function StartPageScript() {
+     
     vw = viewWidth();
     vh = viewHeight();
 
@@ -73,26 +111,10 @@ function StartPageScript() {
         .css({ top: vh - $("#naun").height() - $("#steve").height() - 10 })
         .css({ left: 10 });
 
-    $("#pfImage")
-        .css({ height: Math.min($("#pfImage").height(), 0.7 * vh) })
-        .css({ width: Math.min($("#pfImage").width(), 0.7 * vw) });
+    ScaleImage("#pfImage", "#pennyFarthingPopup");
 
-    
-    $("#pennyFarthingPopup")
-        .css({ width: $("#pfImage").width()+ 10 })
-        .css({ left: 0.5 * (vw - $("#pennyFarthingPopup").width()) })
-        .css({ top: 0.5 * (vh - $("#pennyFarthingPopup").height()) });
-
-    $("#trailmapImage")
-        .css({ height: Math.min($("#trailmapImage").height(), 0.7 * vh) })
-        .css({ width: Math.min($("#trailmapImage").width(), 0.7 * vw) });
-
-
-    $("#trailmappopup")
-        .css({ width: $("#trailmapImage").width() + 10 })
-        .css({ left: 0.5 * (vw - $("#trailmappopup").width()) })
-        .css({ top: 0.5 * (vh - $("#trailmappopup").height()) });
-    
+    ScaleImage("#trailmapImage", "#trailmappopup");
+     
 }
 
 
