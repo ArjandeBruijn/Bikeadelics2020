@@ -25,11 +25,13 @@ $.fn.calculateNaturalDimensions = function (onNaturalDimensionsDefined) {
         img.naturalHeight = newImg.height;
         onNaturalDimensionsDefined(img);
     } else {
-        $(newImg).load(function ()
-        {
+        $(newImg).on('load', function ()
+        { 
             img.naturalWidth = newImg.width;
             img.naturalHeight = newImg.height;
             onNaturalDimensionsDefined(img)
+            
+            
         });
     }
 
@@ -42,12 +44,21 @@ function ScaleImage(id, containerId)
         $(id)
             .css({ height: mult * img.naturalHeight })
             .css({ width: mult * img.naturalWidth });
+
+        var font = '1.1em';  
+
+        if (vh > 900)
+        {
+            font = '35px'
+        }
+
+        $(containerId).css({ 'font-size': font });
          
         $(containerId)
             .css({ width: $(id).width() + 10 })
             .css({ left: 0.5 * (vw - $(containerId).width()) })
             .css({ top: 0.5 * (vh - $(containerId).height()) });
-
+             
     });
 
 }
