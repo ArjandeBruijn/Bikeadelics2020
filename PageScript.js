@@ -70,13 +70,19 @@ function StartPageScript() {
     var heightCorrection = vh / 969;
     var sizeCorrection = Math.min(vw / 1920, heightCorrection);
 
+    var isHorizontalMobile = vh > 1.5 * vw;
+
+    var fIsHorizontalMobile = (isHorizontalMobile ? 1.3 : 1);
+
     $("#steve, #naun, #karbike, #bakfiets")
-        .css({ width: sizeCorrection * 200 });
+        .css({ width: sizeCorrection * 250 * fIsHorizontalMobile });
 
     $("#BikeadelicPennyFarthingBreweryRideText")
         .css({ width: sizeCorrection * 1000 });
 
-    $("#logo").css({ width: 0.23 * vw });
+    var fLogoWidth = (isHorizontalMobile ? 0.5 : 0.23);
+
+    $("#logo").css({ width: fLogoWidth * vw });
 
     $("#howItWorksText")
         .css({ 'font-size': vh > vw ? "1.7em" : sizeCorrection * 1.4 + "em" })
@@ -91,13 +97,7 @@ function StartPageScript() {
         .css({ left: vw - $("#miniPfImage").width() })
         .css({ top: 0 });
 
-    $("#bakfiets")
-        .css({ top: vh - 2 * $("#bakfiets").height() - 20 })
-        .css({ left: vw - $("#bakfiets").width() - 20 });
-
-    $('#karbike')
-        .css({ top: vh - $("#karbike").height() - 20 })
-        .css({ left: vw - $("#karbike").width() - $("#bakfiets").width() - 30 });
+    
      
     var freeSpace = vh - $("#BikeadelicPennyFarthingBreweryRideText").height() - $("#logo").height() - $("#howItWorksText").height();
 
@@ -108,20 +108,40 @@ function StartPageScript() {
 
     $("#logo")
         .css({ left: 0.5 * vw - 0.5 * $("#logo").width() })
-        .css({ top: 0.25 * freeSpace + $("#BikeadelicPennyFarthingBreweryRideText")[0].getBoundingClientRect().bottom });
+        .css({ top: (fIsHorizontalMobile ? 0.15 : 0.25)  * freeSpace + $("#BikeadelicPennyFarthingBreweryRideText")[0].getBoundingClientRect().bottom });
 
     $("#howItWorksText")
-        .css({ top: 0.25 * freeSpace + $("#logo")[0].getBoundingClientRect().bottom })
+        .css({ top: (fIsHorizontalMobile ? 0.15 : 0.25) * freeSpace + $("#logo")[0].getBoundingClientRect().bottom })
         .css({ left: 0.5 * (vw - $("#howItWorksText").width()) });
 
-    $("#naun")
-        .css({ top: vh - $("#naun").height() - 20 })
-        .css({ left: $("#steve").width() + 10 });
+    var indentationFraction = 0.75;
+
+    function calculateInnerDistance(id1, id2, w) {
+        
+
+        var indentation = w == true ?
+            $(id1).width() + (id2 != null ? indentationFraction * $(id2).width() : 0) + 10 :
+            $(id1).height() + (id2 != null ? indentationFraction * $(id2).height() : 0) + 10;
+
+        return indentation;
+    }
 
     $("#steve")
-        .css({ top: vh - $("#naun").height() - $("#steve").height() - 10 })
+        .css({ top: vh - calculateInnerDistance('#naun', "#steve", false) })
         .css({ left: 10 });
 
+    $("#naun")
+        .css({ top: vh - $("#naun").height() - 10 })
+        .css({ left: indentationFraction * $("#steve").width() });
+
+    $("#bakfiets")
+        .css({ top: vh - calculateInnerDistance('#karbike', '#bakfiets', false) })
+        .css({ left: vw - $("#bakfiets").width() - 10 });
+
+    $('#karbike')
+        .css({ top: vh - $("#karbike").height() - 10 })
+        .css({ left: vw - calculateInnerDistance('#karbike', "#bakfiets", true) });
+     
     ScaleImage("#pfImage", "#pennyFarthingPopup");
 
     ScaleImage("#trailmapImage", "#trailmappopup");
