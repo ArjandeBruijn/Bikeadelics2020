@@ -61,57 +61,55 @@ function ScaleImage(id, containerId)
              
     });
 
-}
+} 
+ 
+
+
 function StartPageScript() {
      
     vw = viewWidth();
     vh = viewHeight();
-
-    var heightCorrection = vh / 969;
-    var sizeCorrection = Math.min(vw / 1920, heightCorrection);
-
+     
     var isHorizontalMobile = vh > 1.5 * vw;
-
-    var fIsHorizontalMobile = (isHorizontalMobile ? 1.3 : 1);
-
+    
     $("#steve, #naun, #karbike, #bakfiets")
-        .css({ width: sizeCorrection * 250 * fIsHorizontalMobile });
+        .css({ width: (isHorizontalMobile?  '15vw' : '15vh')});
 
     $("#BikeadelicPennyFarthingBreweryRideText")
-        .css({ width: sizeCorrection * 1000 });
-
-    var fLogoWidth = (isHorizontalMobile ? 0.5 : 0.23);
-
-    $("#logo").css({ width: fLogoWidth * vw });
+        .css({ width: '50vw' });
+     
+    $("#logo").css({ width: (isHorizontalMobile ? '50vw' : '30vh') });
 
     $("#howItWorksText")
-        .css({ 'font-size': vh > vw ? "1.7em" : sizeCorrection * 1.4 + "em" })
-        .css({ width: vh > vw ? 600 : sizeCorrection * 900 });
+        .css({ width: '50vw' })
+        .css({ height: '30vh' });  
+
+    
+    textFit(document.getElementById('howItWorksText'), { minFontSize: 10,  maxFontSize: 120 });
 
     $("#PosingImageRound")
-        .css({ width: sizeCorrection * 500 })
+        .css({ width: '25vw' })
         .css({ top: 0, left: 0 });
 
     $('#miniPfImage')
-        .css({ width: sizeCorrection * 500 })
+        .css({ width: '25vw' })
         .css({ left: vw - $("#miniPfImage").width() })
         .css({ top: 0 });
 
     
-     
     var freeSpace = vh - $("#BikeadelicPennyFarthingBreweryRideText").height() - $("#logo").height() - $("#howItWorksText").height();
 
 
     $("#BikeadelicPennyFarthingBreweryRideText")
         .css({ left: 0.5 * vw - 0.5 * $("#BikeadelicPennyFarthingBreweryRideText").width() })
-        .css({ top: 0.25 * freeSpace });
+        .css({ top: 0.17 * freeSpace });
 
     $("#logo")
         .css({ left: 0.5 * vw - 0.5 * $("#logo").width() })
-        .css({ top: (fIsHorizontalMobile ? 0.15 : 0.25)  * freeSpace + $("#BikeadelicPennyFarthingBreweryRideText")[0].getBoundingClientRect().bottom });
+        .css({ top: $("#BikeadelicPennyFarthingBreweryRideText")[0].getBoundingClientRect().bottom + 0.33 * freeSpace});
 
     $("#howItWorksText")
-        .css({ top: (fIsHorizontalMobile ? 0.15 : 0.25) * freeSpace + $("#logo")[0].getBoundingClientRect().bottom })
+        .css({ top: $("#logo")[0].getBoundingClientRect().bottom + 0.33 * freeSpace })
         .css({ left: 0.5 * (vw - $("#howItWorksText").width()) });
 
     var indentationFraction = 0.75;
@@ -145,6 +143,8 @@ function StartPageScript() {
     ScaleImage("#pfImage", "#pennyFarthingPopup");
 
     ScaleImage("#trailmapImage", "#trailmappopup");
+
+    
      
 }
 
