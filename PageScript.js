@@ -13,54 +13,67 @@ function ShowPopupImage(id) {
 
     $(id).toggleClass("show");
      
-}
-$.fn.calculateNaturalDimensions = function (onNaturalDimensionsDefined) {
-    var img = this[0];
-
-    var newImg = new Image();
-    newImg.src = img.src;
-     
-    if (newImg.complete) {
-        img.naturalWidth = newImg.width;
-        img.naturalHeight = newImg.height;
-        onNaturalDimensionsDefined(img);
-    } else {
-        $(newImg).on('load', function ()
-        { 
-            img.naturalWidth = newImg.width;
-            img.naturalHeight = newImg.height;
-            onNaturalDimensionsDefined(img)
-            
-            
-        });
-    }
-
-};
-function ScaleImage(id, containerId)
+} 
+function ScaleImage(imageId, textId,  containerId, popupId, verticalOrientation)
 {
-    $(id).calculateNaturalDimensions(function (img) {
-        var mult = Math.min(((0.7 * vh) / img.naturalHeight), ((0.7 * vw) / img.naturalWidth));
+    $(containerId).css({ width: 'auto' })
+        .css({ height: 'auto' })
+        .css({ top: 'auto' })
+        .css({ 'max-height': 'auto' })
+        .css({ 'padding': 'auto' });
 
-        $(id)
-            .css({ height: mult * img.naturalHeight })
-            .css({ width: mult * img.naturalWidth });
 
-        var font = '1.1em';  
-
-        if (vh > 900)
-        {
-            font = '35px'
-        }
-
-        $(containerId).css({ 'font-size': font });
+    $(imageId).css({ width: 'auto' })
+        .css({ 'max-height': 'auto' })
+        .css({ height: 'auto' })
+        .css({ 'margin-left': 'auto' });
          
-        $(containerId)
-            .css({ width: $(id).width() + 10 })
-            .css({ left: 0.5 * (vw - $(containerId).width()) })
-            .css({ top: 0.5 * (vh - $(containerId).height()) });
-             
-    });
+    $(textId)
+        .css({ height: 'auto' })
+        .css({ 'float': 'auto' })
+        .css({ width: 'auto' })
+        .css({ 'margin-top': 'auto' });
 
+    if (verticalOrientation) {
+         
+        $(containerId).css({ width: '80vw' })
+            .css({ height: '90vh' })
+            .css({ top: '15vh' });
+         
+        $(imageId).css({ width: '75vw' })
+            .css({ 'margin-left': '2.5vw' });
+
+        $(textId)
+            .css({ height: $(containerId).height() - $(imageId).height() })
+            .css({ 'float': 'none' });
+
+        textFit($(textId), { maxFontSize: 40 });
+         
+    }
+    else {
+
+        // side by side
+        $(containerId).css({ height: '80vh' })
+            .css({ 'padding': '2vh' })
+            .css({ width: '70vw' })
+            .css({ top: '10vh' });
+
+        $(imageId).css({ width: '30vw' })
+            .css({ 'max-height': $(textId).parent().height() });
+            
+        $(textId).css({ height: $(textId).parent().height() })
+            .css({ width: '35vw' })
+            .css({ 'float': 'right' });
+
+        textFit($(textId), { maxFontSize: 40 });
+
+        $(textId).children(":first")
+            .css({ 'margin-top': 0.5 * ($(containerId).height() - ($(textId).children(":first").height())) + 'px' });
+         
+    }
+     
+    $(popupId).css({ left: 0.5 * (vw - $(popupId).width()) })
+        .css({ top: 0.5 * (vh - $(popupId).height()) });
 } 
  
 
@@ -70,22 +83,22 @@ function StartPageScript() {
     vw = viewWidth();
     vh = viewHeight();
      
-    var isHorizontalMobile = vh > 1.5 * vw;
+    var verticalOrientation = vh >  vw;
     
     $("#steve, #naun, #karbike, #bakfiets")
-        .css({ width: (isHorizontalMobile?  '15vw' : '15vh')});
+        .css({ width: (verticalOrientation?  '15vw' : '15vh')});
 
     $("#BikeadelicPennyFarthingBreweryRideText")
         .css({ width: '50vw' });
      
-    $("#logo").css({ width: (isHorizontalMobile ? '50vw' : '30vh') });
+    $("#logo").css({ width: (verticalOrientation ? '50vw' : '30vh') });
 
     $("#howItWorksText")
         .css({ width: '50vw' })
         .css({ height: '30vh' });  
 
     
-    textFit(document.getElementById('howItWorksText'), { minFontSize: 10,  maxFontSize: 120 });
+    textFit($('#howItWorksText'), { minFontSize: 10,  maxFontSize: 120 });
 
     $("#PosingImageRound")
         .css({ width: '25vw' })
@@ -140,9 +153,9 @@ function StartPageScript() {
         .css({ top: vh - $("#karbike").height() - 10 })
         .css({ left: vw - calculateInnerDistance('#karbike', "#bakfiets", true) });
      
-    ScaleImage("#pfImage", "#pennyFarthingPopup");
+    ScaleImage("#pfImage", "#pfText","#pennyFarthing", "#pennyFarthingPopup", verticalOrientation);
 
-    ScaleImage("#trailmapImage", "#trailmappopup");
+    ScaleImage("#trailmapImage", "#trailmapText", "#trailmap", "#trailmappopup", verticalOrientation);
 
     
      
